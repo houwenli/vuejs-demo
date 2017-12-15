@@ -2,15 +2,12 @@
   <div id="app">
     <img src="./assets/logo.png">
     <router-view/>
-    <HeaderDiv></HeaderDiv>
   </div>
 </template>
 
 <script>
-import HeaderDiv from './components/HeaderDiv'
 export default {
-  name: 'app',
-  components:{HeaderDiv}
+  name: 'app'
 }
 </script>
 
