@@ -1,7 +1,9 @@
 <template>
 	<div class="personinfo">
+		<input type="button" name="" value="按钮" v-on:click="callFather">
 		<input type="hidden" id="uid" v-model="uid" />
-		<div v-if="login"  class="personlogged">
+		<input type="input" id="username" v-model="username" />
+		<div v-if="login"  class="personlogged" v-on:click="callFather">
 			<a class="pl-link" href="http://bbs.360.cn/apk/download/" target="_blank">360社区APP</a>
 			<span class="pl-line">|</span>
 			<a class="pl-link" href="http://bbs.360.cn/" target="_blank">进入社区</a>
@@ -29,21 +31,48 @@
 
 <script>
 export default {
-	name:'HeaderDiv',
-	data:function(){
+	name: 'HeaderDiv',
+	props: ['name'],
+	data: function() {
 		return {
-			username:'houwenli',
-			uid:1111
+			uid: 1111
 		}
 	},
-	computed:{
-		login:function(){
-			return this.uid?true:false;
+	methods: {
+		callFather: function() {
+			this.$emit('isLogin')
+		}
+	},
+	computed: {
+		login: function() {
+			return this.uid ? this.uid : false
+		},
+		username: function() {
+			return this.name
 		}
 	}
 }
 </script>
 
 <style>
-	
+.personlogged {
+    position: absolute;
+    right: 167px;
+    top: 44px;
+    z-index: 100;
+}
+.pl-link {
+    color: #fff;
+    padding-right: 3px;
+}
+.pl-line {
+    color: #fff;
+    padding-right: 3px;
+}
+.username, .userlogout {
+    color: #fff;
+}
+.username {
+    padding-left: 25px;
+}
 </style>

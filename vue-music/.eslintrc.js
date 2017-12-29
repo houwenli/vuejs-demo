@@ -20,11 +20,6 @@ module.exports = {
     // allow async-await
     'generator-star-spacing': 'off',
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    // 首行缩进
-    'indent':0,
-    // 空格
-    'no-tabs':'off',
-    'space-before-function-paren':0
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }
 }
