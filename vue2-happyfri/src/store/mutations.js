@@ -2,6 +2,7 @@ const ADD_ITEMNUM = 'ADD_ITEMNUM'
 const REMEMBER_ANSWER = 'REMEMBER_ANSWER'
 const REMEMBER_TIME = 'REMEMBER_TIME'
 const INITIALIZE_DATA = 'INITIALIZE_DATA'
+const REMEMBER_RIGHTANSWER = 'REMEMBER_RIGHTANSWER'
 
 export default {
 	//点击进入下一题
@@ -12,6 +13,11 @@ export default {
 	// 记录用户答案
 	[REMEMBER_ANSWER](state, id){
 		state.answerid.push(id)
+	},
+
+	// 记录正确答案
+	[REMEMBER_RIGHTANSWER](state, id){
+		state.rightAnswer.push(id)
 	},
 
 	// 记录做题时间
@@ -25,7 +31,8 @@ export default {
 	[INITIALIZE_DATA](state){
 		state.itemNum = 1;
 		state.allTime = 0;
-		state.timer = '';
+		state.timer = null;
 		state.answerid = [];
+		state.rightAnswer = [];
 	}
 }

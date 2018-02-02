@@ -1,7 +1,9 @@
 <template>
+	<Itemcontainer fatherComponent="item"></Itemcontainer>
 </template>
 
 <script>
+import Itemcontainer from '../../components/itemcontainer'
 export default {
 	name:'',
 	data(){
@@ -13,10 +15,9 @@ export default {
 
 	},
 	components:{
-
+		Itemcontainer
 	},
 	created(){
-
 	}
 }
 </script>

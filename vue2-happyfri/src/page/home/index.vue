@@ -1,5 +1,5 @@
 <template>
-	<Itemcontainer></Itemcontainer>
+	<Itemcontainer fatherComponent="home"></Itemcontainer>
 </template>
 
 <script>
@@ -18,7 +18,6 @@ export default {
 		Itemcontainer
 	},
 	created(){
-
 	}
 }
 </script>

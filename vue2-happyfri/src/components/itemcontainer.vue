@@ -1,52 +1,116 @@
 <template>
 	<section>
 		<header class="top_tips">
-    		<span v-if="this.fatherComponent=='home'" class="num_tip">第一周</span>
-    		<span v-if="this.fatherComponent=='item'" class="num_tip">题目1</span>
+    		<span v-if="fatherComponent=='home'" class="num_tip">{{level}}</span>
+    		<span v-if="fatherComponent=='item'" class="num_tip">题目{{itemNum}}</span>
     	</header>
-    	<div v-if="this.fatherComponent=='home'">
+    	<div v-if="fatherComponent=='home'">
     		<div class="home_logo item_container_style"></div>
     		<router-link to="item" class="start button_style" ></router-link>
     	</div>
-    	<div v-if="this.fatherComponent=='item'">
+    	<div v-if="fatherComponent=='item'">
     		<div class="item_back item_container_style">
-    			<div class="item_list_container">
-    				<header class="item_title">题目一</header>
+    			<div class="item_list_container" v-if="itemDetail.length>0">
+    				<header class="item_title">{{itemDetail[itemNum-1].topic_name}}</header>
     				<ul>
-    					<li class="item_list"><span class="option_style">A</span> <span class="option_detail">答案aaaa</span></li>
+    					<li v-for="(item,index) in itemDetail[itemNum-1].topic_answer" class="item_list"><span class="option_style" v-on:click="userChoose(item.topic_answer_id)" v-bind:class="{'has_choosed':chooseId==item.topic_answer_id}">{{chooseOption(index)}}</span> <span class="option_detail">{{item.answer_name}}</span></li>
     				</ul>
     			</div>
     		</div>
-    		<span class="next_item button_style"></span>
-    		<span class="submit_item button_style" ></span>
+    		<span class="next_item button_style" v-on:click="goNext" v-if="itemNum < itemDetail.length"></span>
+    		<span class="submit_item button_style" v-on:click="submitAnswer" v-else></span>
     	</div>
 	</section>
 </template>
 
 <script>
+import {mapState, mapActions} from 'vuex'
+
 export default {
-	name:'',
+	name:'itemcontainer',
 	props: {
 		fatherComponent: {
 			type: String,
 			default(){
-				return 'item'
+				return ''
 			}
 		}
 	},
 	data(){
 		return {
-
+			chooseId:null
 		}
 	},
-	computed:{
-
+	methods: {
+		...mapActions(['addNum','initializeData','rememberRightAnswer']),
+		chooseOption(id){
+			switch(id){
+				case 0:
+					return 'A';
+				break;
+				case 1:
+					return 'B';
+				break;
+				case 2:
+					return 'C';
+				break;
+				case 3:
+					return 'D';
+				break;
+			}
+		},
+		userChoose(id){
+			this.chooseId = id;
+		},
+		goNext(){
+			if(this.chooseId != null){
+				// 寻找正确答案
+				for(var v in this.itemDetail[this.itemNum-1].topic_answer){
+					let value = this.itemDetail[this.itemNum-1].topic_answer[v];
+					if(value.is_standard_answer==1){
+						this.rememberRightAnswer(value.topic_answer_id)
+						break;
+					}
+				}
+				this.addNum(this.chooseId);
+				this.chooseId = null;	
+			}else{
+				alert('您还没有选择答案的');
+			}
+		},
+		submitAnswer(){
+			if(this.chooseId != null){
+				// 寻找正确答案
+				for(var v in this.itemDetail[this.itemNum-1].topic_answer){
+					let value = this.itemDetail[this.itemNum-1].topic_answer[v];
+					if(value.is_standard_answer==1){
+						this.rememberRightAnswer(value.topic_answer_id)
+						break;
+					}
+				}
+				this.addNum(this.chooseId);
+				this.$router.push('score')
+			}else{
+				alert('您还没有选择答案的');
+			}
+		}
+	},
+	computed: {
+		...mapState([
+			'itemNum',
+			'level',
+			'itemDetail',
+			'answerid',
+			'rightAnswer'
+		])
 	},
 	components:{
 
 	},
 	created(){
-
+		//初始化信息
+		this.initializeData();
+		document.body.style.backgroundImage = 'url(./static/1-1.jpg)';
 	}
 }
 </script>
@@ -147,6 +211,11 @@ export default {
     margin-right: 0.3rem;
     font-size: 0.5rem;
     font-family: 'Arial';
+}
+.item_list .has_choosed {
+    background-color: #ffd400;
+    color: #575757;
+    border-color: #ffd400;
 }
 .item_list .option_detail {
     width: 7.5rem;
