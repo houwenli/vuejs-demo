@@ -13,7 +13,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
-Vue.use(axios,VueAxios)
+// Vue.use(axios,VueAxios)
 
 const ERR_OK = 0;
 // 判断环境
@@ -38,11 +38,14 @@ export default {
 
   },
   created(){
-    // const url = debug ? '/api/seller' : '';
-    // console.log(Vue.axios)
-    // Vue.axios.get(url+'?id='+this.seller.id).then((response)=>{
-    //   console.log(response)
-    // })
+    const url = debug ? '/api/seller' : '';
+    console.log(Vue.axios)
+    axios.get(url+'?id='+this.seller.id).then((response)=>{
+      response = response.data;
+      if(response.errno === ERR_OK){
+        this.seller = Object.assign({},this.seller,response.data);
+      }
+    })
   },
   components:{
     'v-header':header
