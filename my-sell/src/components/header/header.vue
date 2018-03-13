@@ -1,6 +1,89 @@
 <template>
-	<div v-bind:sellerObj="sellerObj">
-		hahahha
+	<div class="header">
+		<div class="content-wrapper">
+			<div class="avatar">
+				<img width="64" height="64" src="http://static.galileo.xiaojukeji.com/static/tms/seller_avatar_256px.jpg">
+			</div> 
+			<div class="content">
+				<div class="title">
+					<span class="brand"></span> 
+					<span class="name">粥品香坊（回龙观）</span>
+				</div>
+				<div class="description">
+        			蜂鸟专送/38分钟送达
+      			</div> 
+      			<div class="support">
+      				<span class="icon decrease"></span> 
+      				<span class="text">在线支付满28减5</span>
+      			</div>
+      		</div> 
+      		<div class="support-count">
+      			<span class="count">5个</span> 
+      			<i class="icon-keyboard_arrow_right"></i>
+      		</div>
+      	</div>
+      	<div class="bulletin-wrapper">
+      		<span class="bulletin-title"></span>
+      		<span class="bulletin-text">粥品香坊其烹饪粥料的秘方源于中国千年古法，在融和现代制作工艺，由世界烹饪大师屈浩先生领衔研发。坚守纯天然、0添加的良心品质深得消费者青睐，发展至今成为粥类的引领品牌。是2008年奥运会和2013年园博会指定餐饮服务商。</span> 
+      		<i class="icon-keyboard_arrow_right"></i>
+      	</div>
+      	<div class="background">
+      		<img width="100%" height="100%" src="http://static.galileo.xiaojukeji.com/static/tms/seller_avatar_256px.jpg">
+      	</div>
+      	<div class="detail" style="display: none;">
+      		<div class="detail-wrapper clearfix">
+      			<div class="detail-main">
+      				<h1 class="name">粥品香坊（回龙观）</h1> 
+      				<div class="star-wrapper">
+      					<div class="star star-48">
+      						<span class="star-item on"></span>
+      						<span class="star-item on"></span>
+      						<span class="star-item on"></span>
+      						<span class="star-item on"></span>
+      						<span class="star-item off"></span>
+      					</div>
+      				</div> 
+      				<div class="title">
+      					<div class="line"></div> 
+      					<div class="text">优惠信息</div> 
+      					<div class="line"></div>
+      				</div> 
+      				<ul class="supports">
+      					<li class="support-item">
+      						<span class="icon decrease"></span> 
+      						<span class="text">在线支付满28减5</span>
+      					</li>
+      					<li class="support-item">
+      						<span class="icon discount"></span> 
+      						<span class="text">VC无限橙果汁全场8折</span>
+      					</li>
+      					<li class="support-item">
+      						<span class="icon special"></span> 
+      						<span class="text">单人精彩套餐</span>
+      					</li>
+      					<li class="support-item">
+      						<span class="icon invoice"></span> 
+      						<span class="text">该商家支持发票,请下单写好发票抬头</span>
+      					</li>
+      					<li class="support-item">
+      						<span class="icon guarantee"></span> 
+      						<span class="text">已加入“外卖保”计划,食品安全保障</span>
+      					</li>
+      				</ul> 
+      				<div class="title">
+      					<div class="line"></div> 
+      					<div class="text">商家公告</div> 
+      					<div class="line"></div>
+      				</div> 
+      				<div class="bulletin">
+      					<p class="content">粥品香坊其烹饪粥料的秘方源于中国千年古法，在融和现代制作工艺，由世界烹饪大师屈浩先生领衔研发。坚守纯天然、0添加的良心品质深得消费者青睐，发展至今成为粥类的引领品牌。是2008年奥运会和2013年园博会指定餐饮服务商。</p>
+      				</div>
+      			</div>
+      		</div> 
+      		<div class="detail-close">
+      			<i class="icon-close"></i>
+      		</div>
+      	</div>
 	</div>
 </template>
 
@@ -33,5 +116,10 @@ export default {
 </script>
 
 <style lang="scss">
-
+	.header {
+	    position: relative;
+	    overflow: hidden;
+	    color: #fff;
+	    background: rgba(7,17,27,0.5);
+	}
 </style>
