@@ -1,77 +1,35 @@
 <template>
 <div>
 	<div class="goods">
-		<div class="menu-wrapper">
+		<div class="menu-wrapper" ref="menuWrapper">
 			<ul>
-				<li class="menu-item current">
+				<li class="menu-item" v-for="(item,index) in goods" v-bind:class="{'current':currentIndex === index}" v-on:click="showMenu(index)" ref="menuList">
 					<span class="text border-1px">
-						<span class="icon" style="display: none;"></span>
-						热销榜
-					</span>
-				</li>
-				<li class="menu-item current">
-					<span class="text border-1px">
-						<span class="icon" style="display: none;"></span>
-						热销榜
-					</span>
-				</li>
-				<li class="menu-item current">
-					<span class="text border-1px">
-						<span class="icon" style="display: none;"></span>
-						热销榜
-					</span>
-				</li>
-				<li class="menu-item current">
-					<span class="text border-1px">
-						<span class="icon" style="display: none;"></span>
-						热销榜
-					</span>
-				</li>
-				<li class="menu-item current">
-					<span class="text border-1px">
-						<span class="icon" style="display: none;"></span>
-						热销榜
-					</span>
-				</li>
-				<li class="menu-item current">
-					<span class="text border-1px">
-						<span class="icon" style="display: none;"></span>
-						热销榜
-					</span>
-				</li>
-				<li class="menu-item current">
-					<span class="text border-1px">
-						<span class="icon" style="display: none;"></span>
-						热销榜
-					</span>
-				</li>
-				<li class="menu-item current">
-					<span class="text border-1px">
-						<span class="icon" style="display: none;"></span>
-						热销榜
+						<span v-if="item.type>=0" class="icon" v-bind:class="classMap[item.type]" ></span>
+						{{item.name}}
 					</span>
 				</li>
 			</ul>
 		</div>
-		<div class="foods-wrapper">
+		<div class="foods-wrapper" ref="foodsWrapper">
 			<ul>
-				<li class="food-list">
-					<h1 class="title">冰爽饮品限时特惠</h1>
+				<li class="food-list" v-for="(item,index) in goods" ref="foodList">
+					<h1 class="title">{{item.name}}</h1>
 					<ul>
-						<li class="food-item border-1px">
+						<li class="food-item border-1px" v-for="(foodItem,foodIndex) in item.foods">
 							<div class="icon">
-								<img width="57" height="57" src="http://fuss10.elemecdn.com/e/c6/f348e811772016ae24e968238bcbfjpeg.jpeg?imageView2/1/w/114/h/114">
-							</div> 
+								<img width="57" height="57" v-bind:src="foodItem.icon">
+							</div>
 							<div class="content">
-								<h2 class="name">VC无限橙果汁</h2> 
+								<h2 class="name">{{foodItem.name}}</h2> 
 								<p class="desc"></p> 
 								<div class="extra">
-									<span class="count">月售15份</span>
-									<span>好评率100%</span>
+									<span class="count">月售{{foodItem.sellCount}}份</span>
+									<span>好评率{{foodItem.rating}}%</span>
 								</div> 
 								<div class="price">
-									<span class="now">￥8</span>
-									<span class="old">￥10</span>
+									<span class="now">￥{{foodItem.price}}</span>
+									<span class="old" v-if="foodItem.oldPrice">￥{{foodItem.oldPrice}}</span>
 								</div> 
 								<div class="cartcontrol-wrapper">
 									<div class="cartcontrol">
@@ -82,521 +40,7 @@
 										<div class="cart-add icon-add_circle"></div>
 									</div>
 								</div>
-							</div>
-						</li>
-						<li class="food-item border-1px">
-							<div class="icon">
-								<img width="57" height="57" src="http://fuss10.elemecdn.com/e/c6/f348e811772016ae24e968238bcbfjpeg.jpeg?imageView2/1/w/114/h/114">
 							</div> 
-							<div class="content">
-								<h2 class="name">VC无限橙果汁</h2> 
-								<p class="desc"></p> 
-								<div class="extra">
-									<span class="count">月售15份</span>
-									<span>好评率100%</span>
-								</div> 
-								<div class="price">
-									<span class="now">￥8</span>
-									<span class="old">￥10</span>
-								</div> 
-								<div class="cartcontrol-wrapper">
-									<div class="cartcontrol">
-										<div class="cart-decrease" style="display: none;">
-											<span class="inner icon-remove_circle_outline"></span>
-										</div> 
-										<div class="cart-count" style="display: none;"></div> 
-										<div class="cart-add icon-add_circle"></div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="food-item border-1px">
-							<div class="icon">
-								<img width="57" height="57" src="http://fuss10.elemecdn.com/e/c6/f348e811772016ae24e968238bcbfjpeg.jpeg?imageView2/1/w/114/h/114">
-							</div> 
-							<div class="content">
-								<h2 class="name">VC无限橙果汁</h2> 
-								<p class="desc"></p> 
-								<div class="extra">
-									<span class="count">月售15份</span>
-									<span>好评率100%</span>
-								</div> 
-								<div class="price">
-									<span class="now">￥8</span>
-									<span class="old">￥10</span>
-								</div> 
-								<div class="cartcontrol-wrapper">
-									<div class="cartcontrol">
-										<div class="cart-decrease" style="display: none;">
-											<span class="inner icon-remove_circle_outline"></span>
-										</div> 
-										<div class="cart-count" style="display: none;"></div> 
-										<div class="cart-add icon-add_circle"></div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="food-item border-1px">
-							<div class="icon">
-								<img width="57" height="57" src="http://fuss10.elemecdn.com/e/c6/f348e811772016ae24e968238bcbfjpeg.jpeg?imageView2/1/w/114/h/114">
-							</div> 
-							<div class="content">
-								<h2 class="name">VC无限橙果汁</h2> 
-								<p class="desc"></p> 
-								<div class="extra">
-									<span class="count">月售15份</span>
-									<span>好评率100%</span>
-								</div> 
-								<div class="price">
-									<span class="now">￥8</span>
-									<span class="old">￥10</span>
-								</div> 
-								<div class="cartcontrol-wrapper">
-									<div class="cartcontrol">
-										<div class="cart-decrease" style="display: none;">
-											<span class="inner icon-remove_circle_outline"></span>
-										</div> 
-										<div class="cart-count" style="display: none;"></div> 
-										<div class="cart-add icon-add_circle"></div>
-									</div>
-								</div>
-							</div>
-						</li>
-					</ul>
-				</li>
-				<li class="food-list">
-					<h1 class="title">冰爽饮品限时特惠</h1>
-					<ul>
-						<li class="food-item border-1px">
-							<div class="icon">
-								<img width="57" height="57" src="http://fuss10.elemecdn.com/e/c6/f348e811772016ae24e968238bcbfjpeg.jpeg?imageView2/1/w/114/h/114">
-							</div> 
-							<div class="content">
-								<h2 class="name">VC无限橙果汁</h2> 
-								<p class="desc"></p> 
-								<div class="extra">
-									<span class="count">月售15份</span>
-									<span>好评率100%</span>
-								</div> 
-								<div class="price">
-									<span class="now">￥8</span>
-									<span class="old">￥10</span>
-								</div> 
-								<div class="cartcontrol-wrapper">
-									<div class="cartcontrol">
-										<div class="cart-decrease" style="display: none;">
-											<span class="inner icon-remove_circle_outline"></span>
-										</div> 
-										<div class="cart-count" style="display: none;"></div> 
-										<div class="cart-add icon-add_circle"></div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="food-item border-1px">
-							<div class="icon">
-								<img width="57" height="57" src="http://fuss10.elemecdn.com/e/c6/f348e811772016ae24e968238bcbfjpeg.jpeg?imageView2/1/w/114/h/114">
-							</div> 
-							<div class="content">
-								<h2 class="name">VC无限橙果汁</h2> 
-								<p class="desc"></p> 
-								<div class="extra">
-									<span class="count">月售15份</span>
-									<span>好评率100%</span>
-								</div> 
-								<div class="price">
-									<span class="now">￥8</span>
-									<span class="old">￥10</span>
-								</div> 
-								<div class="cartcontrol-wrapper">
-									<div class="cartcontrol">
-										<div class="cart-decrease" style="display: none;">
-											<span class="inner icon-remove_circle_outline"></span>
-										</div> 
-										<div class="cart-count" style="display: none;"></div> 
-										<div class="cart-add icon-add_circle"></div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="food-item border-1px">
-							<div class="icon">
-								<img width="57" height="57" src="http://fuss10.elemecdn.com/e/c6/f348e811772016ae24e968238bcbfjpeg.jpeg?imageView2/1/w/114/h/114">
-							</div> 
-							<div class="content">
-								<h2 class="name">VC无限橙果汁</h2> 
-								<p class="desc"></p> 
-								<div class="extra">
-									<span class="count">月售15份</span>
-									<span>好评率100%</span>
-								</div> 
-								<div class="price">
-									<span class="now">￥8</span>
-									<span class="old">￥10</span>
-								</div> 
-								<div class="cartcontrol-wrapper">
-									<div class="cartcontrol">
-										<div class="cart-decrease" style="display: none;">
-											<span class="inner icon-remove_circle_outline"></span>
-										</div> 
-										<div class="cart-count" style="display: none;"></div> 
-										<div class="cart-add icon-add_circle"></div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="food-item border-1px">
-							<div class="icon">
-								<img width="57" height="57" src="http://fuss10.elemecdn.com/e/c6/f348e811772016ae24e968238bcbfjpeg.jpeg?imageView2/1/w/114/h/114">
-							</div> 
-							<div class="content">
-								<h2 class="name">VC无限橙果汁</h2> 
-								<p class="desc"></p> 
-								<div class="extra">
-									<span class="count">月售15份</span>
-									<span>好评率100%</span>
-								</div> 
-								<div class="price">
-									<span class="now">￥8</span>
-									<span class="old">￥10</span>
-								</div> 
-								<div class="cartcontrol-wrapper">
-									<div class="cartcontrol">
-										<div class="cart-decrease" style="display: none;">
-											<span class="inner icon-remove_circle_outline"></span>
-										</div> 
-										<div class="cart-count" style="display: none;"></div> 
-										<div class="cart-add icon-add_circle"></div>
-									</div>
-								</div>
-							</div>
-						</li>
-					</ul>
-				</li>
-				<li class="food-list">
-					<h1 class="title">冰爽饮品限时特惠</h1>
-					<ul>
-						<li class="food-item border-1px">
-							<div class="icon">
-								<img width="57" height="57" src="http://fuss10.elemecdn.com/e/c6/f348e811772016ae24e968238bcbfjpeg.jpeg?imageView2/1/w/114/h/114">
-							</div> 
-							<div class="content">
-								<h2 class="name">VC无限橙果汁</h2> 
-								<p class="desc"></p> 
-								<div class="extra">
-									<span class="count">月售15份</span>
-									<span>好评率100%</span>
-								</div> 
-								<div class="price">
-									<span class="now">￥8</span>
-									<span class="old">￥10</span>
-								</div> 
-								<div class="cartcontrol-wrapper">
-									<div class="cartcontrol">
-										<div class="cart-decrease" style="display: none;">
-											<span class="inner icon-remove_circle_outline"></span>
-										</div> 
-										<div class="cart-count" style="display: none;"></div> 
-										<div class="cart-add icon-add_circle"></div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="food-item border-1px">
-							<div class="icon">
-								<img width="57" height="57" src="http://fuss10.elemecdn.com/e/c6/f348e811772016ae24e968238bcbfjpeg.jpeg?imageView2/1/w/114/h/114">
-							</div> 
-							<div class="content">
-								<h2 class="name">VC无限橙果汁</h2> 
-								<p class="desc"></p> 
-								<div class="extra">
-									<span class="count">月售15份</span>
-									<span>好评率100%</span>
-								</div> 
-								<div class="price">
-									<span class="now">￥8</span>
-									<span class="old">￥10</span>
-								</div> 
-								<div class="cartcontrol-wrapper">
-									<div class="cartcontrol">
-										<div class="cart-decrease" style="display: none;">
-											<span class="inner icon-remove_circle_outline"></span>
-										</div> 
-										<div class="cart-count" style="display: none;"></div> 
-										<div class="cart-add icon-add_circle"></div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="food-item border-1px">
-							<div class="icon">
-								<img width="57" height="57" src="http://fuss10.elemecdn.com/e/c6/f348e811772016ae24e968238bcbfjpeg.jpeg?imageView2/1/w/114/h/114">
-							</div> 
-							<div class="content">
-								<h2 class="name">VC无限橙果汁</h2> 
-								<p class="desc"></p> 
-								<div class="extra">
-									<span class="count">月售15份</span>
-									<span>好评率100%</span>
-								</div> 
-								<div class="price">
-									<span class="now">￥8</span>
-									<span class="old">￥10</span>
-								</div> 
-								<div class="cartcontrol-wrapper">
-									<div class="cartcontrol">
-										<div class="cart-decrease" style="display: none;">
-											<span class="inner icon-remove_circle_outline"></span>
-										</div> 
-										<div class="cart-count" style="display: none;"></div> 
-										<div class="cart-add icon-add_circle"></div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="food-item border-1px">
-							<div class="icon">
-								<img width="57" height="57" src="http://fuss10.elemecdn.com/e/c6/f348e811772016ae24e968238bcbfjpeg.jpeg?imageView2/1/w/114/h/114">
-							</div> 
-							<div class="content">
-								<h2 class="name">VC无限橙果汁</h2> 
-								<p class="desc"></p> 
-								<div class="extra">
-									<span class="count">月售15份</span>
-									<span>好评率100%</span>
-								</div> 
-								<div class="price">
-									<span class="now">￥8</span>
-									<span class="old">￥10</span>
-								</div> 
-								<div class="cartcontrol-wrapper">
-									<div class="cartcontrol">
-										<div class="cart-decrease" style="display: none;">
-											<span class="inner icon-remove_circle_outline"></span>
-										</div> 
-										<div class="cart-count" style="display: none;"></div> 
-										<div class="cart-add icon-add_circle"></div>
-									</div>
-								</div>
-							</div>
-						</li>
-					</ul>
-				</li>
-				<li class="food-list">
-					<h1 class="title">冰爽饮品限时特惠</h1>
-					<ul>
-						<li class="food-item border-1px">
-							<div class="icon">
-								<img width="57" height="57" src="http://fuss10.elemecdn.com/e/c6/f348e811772016ae24e968238bcbfjpeg.jpeg?imageView2/1/w/114/h/114">
-							</div> 
-							<div class="content">
-								<h2 class="name">VC无限橙果汁</h2> 
-								<p class="desc"></p> 
-								<div class="extra">
-									<span class="count">月售15份</span>
-									<span>好评率100%</span>
-								</div> 
-								<div class="price">
-									<span class="now">￥8</span>
-									<span class="old">￥10</span>
-								</div> 
-								<div class="cartcontrol-wrapper">
-									<div class="cartcontrol">
-										<div class="cart-decrease" style="display: none;">
-											<span class="inner icon-remove_circle_outline"></span>
-										</div> 
-										<div class="cart-count" style="display: none;"></div> 
-										<div class="cart-add icon-add_circle"></div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="food-item border-1px">
-							<div class="icon">
-								<img width="57" height="57" src="http://fuss10.elemecdn.com/e/c6/f348e811772016ae24e968238bcbfjpeg.jpeg?imageView2/1/w/114/h/114">
-							</div> 
-							<div class="content">
-								<h2 class="name">VC无限橙果汁</h2> 
-								<p class="desc"></p> 
-								<div class="extra">
-									<span class="count">月售15份</span>
-									<span>好评率100%</span>
-								</div> 
-								<div class="price">
-									<span class="now">￥8</span>
-									<span class="old">￥10</span>
-								</div> 
-								<div class="cartcontrol-wrapper">
-									<div class="cartcontrol">
-										<div class="cart-decrease" style="display: none;">
-											<span class="inner icon-remove_circle_outline"></span>
-										</div> 
-										<div class="cart-count" style="display: none;"></div> 
-										<div class="cart-add icon-add_circle"></div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="food-item border-1px">
-							<div class="icon">
-								<img width="57" height="57" src="http://fuss10.elemecdn.com/e/c6/f348e811772016ae24e968238bcbfjpeg.jpeg?imageView2/1/w/114/h/114">
-							</div> 
-							<div class="content">
-								<h2 class="name">VC无限橙果汁</h2> 
-								<p class="desc"></p> 
-								<div class="extra">
-									<span class="count">月售15份</span>
-									<span>好评率100%</span>
-								</div> 
-								<div class="price">
-									<span class="now">￥8</span>
-									<span class="old">￥10</span>
-								</div> 
-								<div class="cartcontrol-wrapper">
-									<div class="cartcontrol">
-										<div class="cart-decrease" style="display: none;">
-											<span class="inner icon-remove_circle_outline"></span>
-										</div> 
-										<div class="cart-count" style="display: none;"></div> 
-										<div class="cart-add icon-add_circle"></div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="food-item border-1px">
-							<div class="icon">
-								<img width="57" height="57" src="http://fuss10.elemecdn.com/e/c6/f348e811772016ae24e968238bcbfjpeg.jpeg?imageView2/1/w/114/h/114">
-							</div> 
-							<div class="content">
-								<h2 class="name">VC无限橙果汁</h2> 
-								<p class="desc"></p> 
-								<div class="extra">
-									<span class="count">月售15份</span>
-									<span>好评率100%</span>
-								</div> 
-								<div class="price">
-									<span class="now">￥8</span>
-									<span class="old">￥10</span>
-								</div> 
-								<div class="cartcontrol-wrapper">
-									<div class="cartcontrol">
-										<div class="cart-decrease" style="display: none;">
-											<span class="inner icon-remove_circle_outline"></span>
-										</div> 
-										<div class="cart-count" style="display: none;"></div> 
-										<div class="cart-add icon-add_circle"></div>
-									</div>
-								</div>
-							</div>
-						</li>
-					</ul>
-				</li>
-				<li class="food-list">
-					<h1 class="title">冰爽饮品限时特惠</h1>
-					<ul>
-						<li class="food-item border-1px">
-							<div class="icon">
-								<img width="57" height="57" src="http://fuss10.elemecdn.com/e/c6/f348e811772016ae24e968238bcbfjpeg.jpeg?imageView2/1/w/114/h/114">
-							</div> 
-							<div class="content">
-								<h2 class="name">VC无限橙果汁</h2> 
-								<p class="desc"></p> 
-								<div class="extra">
-									<span class="count">月售15份</span>
-									<span>好评率100%</span>
-								</div> 
-								<div class="price">
-									<span class="now">￥8</span>
-									<span class="old">￥10</span>
-								</div> 
-								<div class="cartcontrol-wrapper">
-									<div class="cartcontrol">
-										<div class="cart-decrease" style="display: none;">
-											<span class="inner icon-remove_circle_outline"></span>
-										</div> 
-										<div class="cart-count" style="display: none;"></div> 
-										<div class="cart-add icon-add_circle"></div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="food-item border-1px">
-							<div class="icon">
-								<img width="57" height="57" src="http://fuss10.elemecdn.com/e/c6/f348e811772016ae24e968238bcbfjpeg.jpeg?imageView2/1/w/114/h/114">
-							</div> 
-							<div class="content">
-								<h2 class="name">VC无限橙果汁</h2> 
-								<p class="desc"></p> 
-								<div class="extra">
-									<span class="count">月售15份</span>
-									<span>好评率100%</span>
-								</div> 
-								<div class="price">
-									<span class="now">￥8</span>
-									<span class="old">￥10</span>
-								</div> 
-								<div class="cartcontrol-wrapper">
-									<div class="cartcontrol">
-										<div class="cart-decrease" style="display: none;">
-											<span class="inner icon-remove_circle_outline"></span>
-										</div> 
-										<div class="cart-count" style="display: none;"></div> 
-										<div class="cart-add icon-add_circle"></div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="food-item border-1px">
-							<div class="icon">
-								<img width="57" height="57" src="http://fuss10.elemecdn.com/e/c6/f348e811772016ae24e968238bcbfjpeg.jpeg?imageView2/1/w/114/h/114">
-							</div> 
-							<div class="content">
-								<h2 class="name">VC无限橙果汁</h2> 
-								<p class="desc"></p> 
-								<div class="extra">
-									<span class="count">月售15份</span>
-									<span>好评率100%</span>
-								</div> 
-								<div class="price">
-									<span class="now">￥8</span>
-									<span class="old">￥10</span>
-								</div> 
-								<div class="cartcontrol-wrapper">
-									<div class="cartcontrol">
-										<div class="cart-decrease" style="display: none;">
-											<span class="inner icon-remove_circle_outline"></span>
-										</div> 
-										<div class="cart-count" style="display: none;"></div> 
-										<div class="cart-add icon-add_circle"></div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="food-item border-1px">
-							<div class="icon">
-								<img width="57" height="57" src="http://fuss10.elemecdn.com/e/c6/f348e811772016ae24e968238bcbfjpeg.jpeg?imageView2/1/w/114/h/114">
-							</div> 
-							<div class="content">
-								<h2 class="name">VC无限橙果汁</h2> 
-								<p class="desc"></p> 
-								<div class="extra">
-									<span class="count">月售15份</span>
-									<span>好评率100%</span>
-								</div> 
-								<div class="price">
-									<span class="now">￥8</span>
-									<span class="old">￥10</span>
-								</div> 
-								<div class="cartcontrol-wrapper">
-									<div class="cartcontrol">
-										<div class="cart-decrease" style="display: none;">
-											<span class="inner icon-remove_circle_outline"></span>
-										</div> 
-										<div class="cart-count" style="display: none;"></div> 
-										<div class="cart-add icon-add_circle"></div>
-									</div>
-								</div>
-							</div>
 						</li>
 					</ul>
 				</li>
@@ -607,21 +51,87 @@
 </template>
 
 <script>
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+import BScroll from 'better-scroll';
+
+const ERR_OK = 0;
+// 判断环境
+const debug = process.env.NODE_ENV !== 'production';
+
 export default {
 	name:'',
 	data(){
 		return {
-
+			goods:[],
+			listHeight:[],
+			scrollY:0
 		}
 	},
 	computed:{
-
+		currentIndex:function(){
+			for (let i = 0; i < this.listHeight.length; i++) {
+	          let height1 = this.listHeight[i];
+	          let height2 = this.listHeight[i + 1];
+	          if (!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
+	            this._followScroll(i);
+	            return i;
+	          }
+	        }
+			return 0;
+		}
 	},
 	components:{
 
 	},
+	methods:{
+		showMenu(index){
+			let foodList = this.$refs.foodList;
+			let el = foodList[index];
+			this.foodsScroll.scrollToElement(el,300);
+		},
+		_initScroll(){
+			this.menuScroll = new BScroll(this.$refs.menuWrapper,{
+				click: true
+			});
+			this.foodsScroll = new BScroll(this.$refs.foodsWrapper,{
+				click: true,
+				probeType: 3
+			});
+			this.foodsScroll.on('scroll',(pos)=>{
+				if (pos.y <= 0) {
+            		this.scrollY = Math.abs(Math.round(pos.y));
+          		}
+			})
+		},
+		_calculateHeight(){
+			let foodList = this.$refs.foodList;
+			let height = 0;
+			this.listHeight.push(height);
+			for(let i = 0; i < foodList.length; i++){
+				let item = foodList[i];
+				height += item.clientHeight;
+				this.listHeight.push(height);
+			}
+		},
+		_followScroll(index){
+			this.menuScroll.scrollToElement(this.$refs.menuList[index],300)
+		}
+	},
 	created(){
-
+		this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
+		const url = debug ? '/api/goods' : '';
+		axios.get(url).then((response)=>{
+			console.log(response)
+			response = response.data;
+			if(response.errno == ERR_OK){
+				this.goods = response.data;
+				this.$nextTick(function(){
+					this._initScroll();
+					this._calculateHeight();
+				});
+			}
+		})
 	}
 }
 </script>
@@ -663,6 +173,13 @@ export default {
 				}
 			}
 		}
+	}
+	.menu-item.current {
+	  position: relative;
+	  z-index: 10;
+	  margin-top: -1px;
+	  background: #fff;
+	  font-weight: 700;
 	}
 	.foods-wrapper {
 		flex: 1;

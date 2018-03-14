@@ -51,7 +51,6 @@ export default {
   },
   created(){
     const url = debug ? '/api/seller' : '';
-    console.log(Vue.axios)
     axios.get(url+'?id='+this.seller.id).then((response)=>{
       response = response.data;
       if(response.errno === ERR_OK){
